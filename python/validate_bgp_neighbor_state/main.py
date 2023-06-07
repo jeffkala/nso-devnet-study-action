@@ -1,6 +1,7 @@
 # -*- mode: python; python-indent: 4 -*-
 import ncs
-from ncs.application import Service
+
+# from ncs.application import Service
 from ncs.dp import Action
 
 
@@ -11,23 +12,24 @@ class DoubleAction(Action):
     @Action.action
     def cb_action(self, uinfo, name, kp, input, output, trans):
         self.log.info('action name: ', name)
-        self.log.info('action input.number: ', input.number)
+        self.log.info('action input.device: ', input.device)
+        self.log.info('action input.bgp_neighbor_addr: ', input.bgp_neighbor_addr)
 
         # Updating the output data structure will result in a response
         # being returned to the caller.
-        output.result = input.number * 2
+        # output.result = input.number * 2
 
 
 # ------------------------
 # SERVICE CALLBACK EXAMPLE
 # ------------------------
-class ServiceCallbacks(Service):
+# class ServiceCallbacks(Service):
 
-    # The create() callback is invoked inside NCS FASTMAP and
-    # must always exist.
-    @Service.create
-    def cb_create(self, tctx, root, service, proplist):
-        self.log.info('Service create(service=', service._path, ')')
+#     # The create() callback is invoked inside NCS FASTMAP and
+#     # must always exist.
+#     @Service.create
+#     def cb_create(self, tctx, root, service, proplist):
+#         self.log.info('Service create(service=', service._path, ')')
 
 
     # The pre_modification() and post_modification() callbacks are optional,
@@ -60,7 +62,7 @@ class Main(ncs.application.Application):
         # Service callbacks require a registration for a 'service point',
         # as specified in the corresponding data model.
         #
-        self.register_service('validate-bgp-neighbor-state-servicepoint', ServiceCallbacks)
+        # self.register_service('validate-bgp-neighbor-state-servicepoint', ServiceCallbacks)
 
         # When using actions, this is how we register them:
         #
