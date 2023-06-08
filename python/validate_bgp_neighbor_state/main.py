@@ -22,7 +22,7 @@ class DoubleAction(Action):
         self.log.info('action input.bgp_neighbor_addr: ', input.bgp_neighbor_addr)
         root = ncs.maagic.get_root(trans)
         device = root.devices.device[input.device]
-        result = ncs.maapi.get_node(trans,'/ncs:devices/device{router-01}/live-status/ios-stats:bgp/ipv4/unicast/neighbors{1.1.1.2}/ios-stats:bgp-state')
+        result = ncs.maagic.get_node(trans,'/ncs:devices/device{router-01}/live-status/ios-stats:bgp/ipv4/unicast/neighbors{1.1.1.2}/ios-stats:bgp-state')
         self.log.info('result dir : ', dir(result))
         self.log.info('result: ', result)
         # Specify the XPath to retrieve BGP neighbor status
