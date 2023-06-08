@@ -17,7 +17,7 @@ class DoubleAction(Action):
         self.log.info('root: ', root)
         device = root.devices.device[input.device]
         self.log.info('device: ', device)
-        result = device.live_status
+        result = device.live_status.ios_stats__bgp
         self.log.info('result dir : ', dir(result))
         self.log.info('result: ', result)
         # Specify the XPath to retrieve BGP neighbor status
