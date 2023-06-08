@@ -9,15 +9,20 @@ from ncs.dp import Action
 class DoubleAction(Action):
     @Action.action
     def cb_action(self, uinfo, name, kp, input, output, trans):
+
+        # EXAMPLE FROM SHELL
+        # with ncs.maapi.Maapi() as m:
+        #     with ncs.maapi.Session(m, 'admin', 'admin'):
+        #         with m.start_write_trans(ncs.RUNNING) as t:
+        #             node = ncs.maagic.get_node(t, '/ncs:devices/device{router-01}/live-status/ios-stats:bgp/ipv4/unicast/neighbors{1.1.1.2}/ios-stats:bgp-state')
+        #             print(node)
+
         self.log.info('action name: ', name)
         self.log.info('action input.device: ', input.device)
         self.log.info('action input.bgp_neighbor_addr: ', input.bgp_neighbor_addr)
-        self.log.info('dir trans: ', dir(trans))
         root = ncs.maagic.get_root(trans)
-        self.log.info('root: ', root)
         device = root.devices.device[input.device]
-        self.log.info('device: ', device)
-        result = device.live_status.ios_stats__bgp
+        result = ncs.maapi.get_node(trans,'/ncs:devices/device{router-01}/live-status/ios-stats:bgp/ipv4/unicast/neighbors{1.1.1.2}/ios-stats:bgp-state')
         self.log.info('result dir : ', dir(result))
         self.log.info('result: ', result)
         # Specify the XPath to retrieve BGP neighbor status
