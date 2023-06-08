@@ -12,13 +12,15 @@ class DoubleAction(Action):
         self.log.info('action name: ', name)
         self.log.info('action input.device: ', input.device)
         self.log.info('action input.bgp_neighbor_addr: ', input.bgp_neighbor_addr)
-        query = trans.get_oper()
+        self.log.info('dir trans: ', dir(trans))
+        root = ncs.maagic.get_root(trans)
+        self.log.info('root: ', root)
         # Specify the XPath to retrieve BGP neighbor status
-        query.xpath(f'/devices/device[name="{input.device}"]/live-status/bgp/neighbor')
+        # query.xpath(f'/devices/device[name="{input.device}"]/live-status/bgp/neighbor')
 
-        # Execute the query and retrieve the result
-        result = query.apply()
-        self.log.info('result: ', result)
+        # # Execute the query and retrieve the result
+        # result = query.apply()
+        # self.log.info('result: ', result)
 
 # ---------------------------------------------
 # COMPONENT THREAD THAT WILL BE STARTED BY NCS.
