@@ -15,6 +15,11 @@ class DoubleAction(Action):
         self.log.info('dir trans: ', dir(trans))
         root = ncs.maagic.get_root(trans)
         self.log.info('root: ', root)
+        device = root.devices.device[input.device]
+        self.log.info('device: ', device)
+        result = device.live_status
+        self.log.info('result dir : ', dir(result))
+        self.log.info('result: ', result)
         # Specify the XPath to retrieve BGP neighbor status
         # query.xpath(f'/devices/device[name="{input.device}"]/live-status/bgp/neighbor')
 
