@@ -22,15 +22,11 @@ class DoubleAction(Action):
         self.log.info('action input.bgp_neighbor_addr: ', input.bgp_neighbor_addr)
         root = ncs.maagic.get_root(trans)
         device = root.devices.device[input.device]
-        result = ncs.maagic.get_node(trans,'/ncs:devices/device{router-01}/live-status/ios-stats:bgp/ipv4/unicast/neighbors{1.1.1.2}/ios-stats:bgp-state')
+        result = ncs.maagic.get_node(trans, '/ncs:devices/device{router-01}/live-status/ios-stats:bgp/ipv4/unicast/neighbors{1.1.1.2}/ios-stats:bgp-state')
         self.log.info('result dir : ', dir(result))
         self.log.info('result: ', result)
-        # Specify the XPath to retrieve BGP neighbor status
-        # query.xpath(f'/devices/device[name="{input.device}"]/live-status/bgp/neighbor')
-
-        # # Execute the query and retrieve the result
-        # result = query.apply()
-        # self.log.info('result: ', result)
+        # Set the output which is returned with Action is run.
+        output.bgp_state = result
 
 # ---------------------------------------------
 # COMPONENT THREAD THAT WILL BE STARTED BY NCS.
